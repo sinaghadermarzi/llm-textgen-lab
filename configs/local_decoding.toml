@@ -1,0 +1,10 @@
+model = "Qwen/Qwen3-0.6B"
+device = "auto"
+max_new_tokens = 128
+temperature = 0.7
+top_k = 40
+top_p = 0.9
+min_p = 0.05
+typical_p = 1.0
+num_beams = 1
+repetition_penalty = 1.05
