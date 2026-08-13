@@ -20,3 +20,7 @@ The lab defaults to concise rationale summaries and checkable artifacts: equatio
 - When a provider returns encrypted or opaque reasoning state, pass it back only as documented; do not parse or rewrite it.
 
 The educational goal is to understand compute allocation and decoding behavior. It does not require recovering private reasoning.
+
+## History and terminology
+
+"Chain-of-thought" began as a specific prompting technique (Wei et al., 2022) and drifted into an umbrella term covering visible rationales, hidden provider reasoning, and the internal traces reasoning models are trained to produce. [test-time-compute.md](test-time-compute.md) traces that genealogy—chain-of-thought, self-consistency voting, Tree-of-Thoughts backtracking, and modern reasoning models—and defines the vocabulary this lab uses. This page stays focused on handling hidden reasoning safely.

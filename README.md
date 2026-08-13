@@ -42,10 +42,10 @@ Read [docs/curriculum.md](docs/curriculum.md) in order. The short version is:
 
 - `notebooks/01_api_controls.ipynb` — provider reasoning controls, sampling controls, usage, latency, and cost.
 - `notebooks/02_local_decoding.ipynb` — logits, greedy decoding, sampling, beam search, stopping, and repetition controls.
-- `notebooks/03_test_time_compute.ipynb` — multiple candidates, self-consistency, verifier/critic loops, adaptive budgets, and search.
-- `notebooks/04_mcts_search.ipynb` — a model-agnostic Monte Carlo tree search exercise.
+- `notebooks/03_test_time_compute.ipynb` — multiple candidates, self-consistency with answer extraction, best-of-N, verifier/critic and refinement loops, cascaded budgets, and search.
+- `notebooks/04_mcts_search.ipynb` — model-agnostic Monte Carlo tree search, DFS backtracking, and stepwise beam exercises.
 
-The notebooks are companion material; every important operation also exists in importable modules and scripts so it can be tested and automated.
+The notebooks are companion material; every important operation also exists in importable modules and scripts so it can be tested and automated. For the history and current practice of inference-time compute—how chain-of-thought, self-consistency, Tree of Thoughts, and reasoning models relate—read [docs/test-time-compute.md](docs/test-time-compute.md).
 
 ## What this lab measures
 

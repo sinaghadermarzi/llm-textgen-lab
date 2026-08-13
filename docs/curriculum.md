@@ -40,17 +40,20 @@ Some knobs are version- or model-dependent. The local backend records unsupporte
 
 In `03_test_time_compute.ipynb`:
 
-- **Self-consistency:** generate independent candidates and vote on a short, machine-checkable answer.
-- **Draft–critic–revision:** spend three calls to create, critique, and revise an answer.
+- **Self-consistency:** generate independent candidates, vote on the extracted final answer (`majority_vote` with `extract=`), and read the agreement rate as a confidence signal.
+- **Best-of-N:** generate candidates and keep the one a programmatic scorer—tests, a checker, a reward-model stand-in—likes best (`best_of_n`).
+- **Draft–critic–revision:** spend three calls to create, critique, and revise an answer; `refine_loop` iterates the same cycle until an external check accepts.
 - **Verifier selection:** generate candidates, then ask a verifier to score them.
-- **Adaptive allocation:** route easy prompts to a small budget and difficult prompts to a larger one.
+- **Adaptive allocation:** try configurations cheapest-first and stop at the first accepted answer (`escalate`); low agreement among cheap samples is a natural escalation trigger.
 - **Search:** use a language model as a proposal function and a verifier, environment, or test suite as the value function.
 
-Always compare against a one-call baseline and count the complete budget, including verifier calls.
+Always compare against a one-call baseline and count the complete budget, including verifier calls. For where these methods came from and which ones practitioners actually use, read [test-time-compute.md](test-time-compute.md).
 
-## 5. MCTS and tree search
+## 5. Tree search: MCTS, DFS backtracking, and stepwise beam
 
-`04_mcts_search.ipynb` and `scripts/run_search_demo.py` use a tiny arithmetic state space. The point is not that MCTS is automatically useful for free-form text. The point is to identify the missing ingredients needed to make search useful: a way to propose continuations, a state representation, a value function, and a stopping rule. For code, tests can provide a value signal; for puzzles, a checker can; for open-ended writing, automated value is much harder.
+`04_mcts_search.ipynb` and `scripts/run_search_demo.py` use a tiny arithmetic state space. `dfs_backtrack` makes the Tree-of-Thoughts move concrete—descend into the preferred step and undo it when the subtree fails—while `beam_steps` keeps the best few partial paths per step, the frontier shape used with process reward models. Modern reasoning models internalize the same backtracking inside one long trace (see [test-time-compute.md](test-time-compute.md)), which is why explicit search over free-form text is now mostly research-side.
+
+The point is not that MCTS is automatically useful for free-form text. The point is to identify the missing ingredients needed to make search useful: a way to propose continuations, a state representation, a value function, and a stopping rule. For code, tests can provide a value signal; for puzzles, a checker can; for open-ended writing, automated value is much harder.
 
 ## Suggested research questions
 
