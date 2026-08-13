@@ -64,3 +64,4 @@ The point is not that MCTS is automatically useful for free-form text. The point
 5. Does higher temperature improve diversity enough to outweigh lower per-sample accuracy?
 6. Do beam search and sampling fail in different ways on open-ended text?
 7. How sensitive are results to prompt wording and scoring rules?
+8. When does one high-effort call beat a cheapest-first cascade (`escalate`) at equal expected cost?
