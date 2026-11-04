@@ -18,13 +18,18 @@ python -m pip install -e '.[dev]'
 python -m unittest discover -s tests -v
 ```
 
-To run a hosted experiment, install one or more provider extras and export only the key you need:
+To run a hosted experiment, install the provider extras and export only the key you need. `.env.example` lists the variable names; nothing loads a `.env` file automatically, so export them in your shell (or source the file). Add `--dry-run` to print the planned request without calling the provider:
 
 ```bash
 python -m pip install -e '.[api]'
-cp .env.example .env
 export OPENAI_API_KEY='…'       # or ANTHROPIC_API_KEY / GEMINI_API_KEY
 python scripts/run_api_experiment.py --provider openai --model gpt-5.6 --effort low
+```
+
+The search algorithms (MCTS, DFS backtracking, stepwise beam) have an offline demo that needs no extras:
+
+```bash
+python scripts/run_search_demo.py
 ```
 
 To run a local experiment, install the local extra. The first run downloads the model named by `--model` from Hugging Face:
@@ -57,7 +62,7 @@ The lab treats hidden chain-of-thought carefully. It does not ask hosted provide
 
 ```text
 llm_textgen_lab/       dependency-light core, providers, local generation, search
-configs/               reproducible experiment presets
+configs/               reference presets (TOML) to copy into script flags; not loaded by code
 docs/                  explanations, safety notes, provider matrix, curriculum
 notebooks/             guided lab notebooks
 scripts/               command-line entry points
